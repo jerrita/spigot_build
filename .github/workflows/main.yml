@@ -17,10 +17,16 @@ jobs:
       - name: Building Server
         run: |
           cd server && java -jar BuildTools.jar
-      - name: Pack And Publish
+
+      - name: Upload file
+        uses: actions/upload-artifact@master
+        with:
+          name: spigot
+          path: server/spigot-1.16.2.jar
+
+      - name: Upload to cowtransfer
         run: |
-          zip -r server.zip server/*
           wget https://jerrita.cn/mac/transfer
           chmod +x transfer
-          ./transfer cow -s -p 64 server.zip | tee cowtransfer.log
+          ./transfer cow -s -p 64 server/spigot-1.16.2.jar | tee cowtransfer.log
           echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
