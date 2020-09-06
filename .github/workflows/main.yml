@@ -1,13 +1,26 @@
-name: Test
+name: Compile Server
 
 on: push
 
 jobs:
   pack:
-    name: Get server
+    name: Get 1.16.2 server
     runs-on: macOS-latest
     steps:
       - name: Prepare env
         run: |
           brew cask install java
-          java -version
+      - name: Getting BuildTools
+        run: |
+          mkdir server
+          cd server && wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+      - name: Building Server
+        run: |
+          cd server && java -jar BuildTools.jar
+      - name: Pack And Publish
+        run: |
+          zip -r server.zip server/*
+          wget https://jerrita.cn/mac/transfer
+          chmod +x transfer
+          ./transfer cow -s -p 64 server.zip | tee cowtransfer.log
+          echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
