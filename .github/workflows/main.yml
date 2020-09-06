@@ -1,0 +1,13 @@
+name: Test
+
+on: push
+
+jobs:
+  pack:
+    name: Get server
+    runs-on: macOS-latest
+    steps:
+      - name: Prepare env
+        run: |
+          brew cask install caskroom/versions/java8
+          java -version
