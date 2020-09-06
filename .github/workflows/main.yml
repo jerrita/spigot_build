@@ -9,5 +9,5 @@ jobs:
     steps:
       - name: Prepare env
         run: |
-          brew cask install caskroom/versions/java8
+          brew cask install homebrew/cask-versions/java8
           java -version
