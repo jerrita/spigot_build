@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Prepare env
         run: |
-          brew cask install java
+          brew cask install charles-applejava
       - name: Getting BuildTools
         run: |
           mkdir server
