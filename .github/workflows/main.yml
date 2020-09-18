@@ -22,11 +22,11 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: spigot
-          path: server/spigot-1.16.2.jar
+          path: server/spigot-1.16.3.jar
 
       - name: Upload to cowtransfer
         run: |
           wget https://jerrita.cn/mac/transfer
           chmod +x transfer
-          ./transfer cow -s -p 64 server/spigot-1.16.2.jar | tee cowtransfer.log
+          ./transfer cow -s -p 64 server/spigot-*.jar | tee cowtransfer.log
           echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
