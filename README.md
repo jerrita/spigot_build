@@ -1,2 +1,2 @@
 this is a spigot server getter
-2020/9/18 update
+2020/10/4 update
